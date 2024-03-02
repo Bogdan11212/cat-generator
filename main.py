@@ -39,7 +39,7 @@ def index():
 def convert_prediction_to_html(prediction):
     classes = ['Котик', 'Собака', 'Птица']  # для примера, замените на ваши классы
     probabilities = prediction[0]
-    image_html = ""
+    image_html = "index.html"
 
     for i in range(len(classes)):
         image_html += "<p>{0}: {1}%</p>".format(classes[i], probabilities[i] * 100)
