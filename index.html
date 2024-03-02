@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .image-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        img {
+            max-width: 400px;
+            margin-top: 20px;
+        }
+
+        .prediction-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Image Prediction</h1>
+        <div class="image-container">
+            {{ image_html }}
+            <img src="{{ image_url }}">
+        </div>
+        <div class="prediction-container">
+            <p>{{ prediction }}</p>
+        </div>
+    </div>
+</body>
+</html>
