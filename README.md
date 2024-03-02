@@ -8,7 +8,8 @@
     <br/>
   </p>
 </p>
- ![Contributors](https://img.shields.io/github/contributors/bogdan11212/cat-generator?color=dark-green) ![Forks](https://img.shields.io/github/forks/bogdan11212/cat-generator?style=social) ![Stargazers](https://img.shields.io/github/stars/bogdan11212/cat-generator?style=social) ![Issues](https://img.shields.io/github/issues/bogdan11212/cat-generator) ![License](https://img.shields.io/github/license/bogdan11212/cat-generator) 
+ 
+![Contributors](https://img.shields.io/github/contributors/bogdan11212/cat-generator?color=dark-green) ![Forks](https://img.shields.io/github/forks/bogdan11212/cat-generator?style=social) ![Stargazers](https://img.shields.io/github/stars/bogdan11212/cat-generator?style=social) ![Issues](https://img.shields.io/github/issues/bogdan11212/cat-generator) ![License](https://img.shields.io/github/license/bogdan11212/cat-generator) 
 
 ## Built With
 
