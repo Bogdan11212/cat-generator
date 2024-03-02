@@ -1,28 +1,68 @@
 import tensorflow as tf
 from tensorflow import keras
-from flask import Flask, render_template_string
+from flask import Flask, render_template, request
 import numpy as np
+import base64
+from PIL import Image
 
-# Загрузка предварительно обученной модели
-model = keras.models.load_model('path/to/your/model.h5')
+# загрузка предварительно обученной модели
+model = None
 
-# Создание веб-сервера
+# создание веб-сервера
 app = Flask(__name__)
 
-# Маршрут для отображения котика
+# загрузка модели пользователя
+@app.route('/upload_model', methods=['POST'])
+def upload_model():
+    global model
+    model_file = request.files['model']
+    model = keras.models.load_model(model_file)
+    return 'Model Uploaded Successfully!'
+
+
+# маршрут для отображения изображений
 @app.route('/')
 def index():
-    # Генерация случайных входных данных
+    # генерация случайных входных данных
     random_input = np.random.rand(1, input_shape)
 
-    # Получение предсказания нейронной сети
+    # получение предсказания нейронной сети
     prediction = model.predict(random_input)
 
-    # Преобразование предсказания в HTML-код для отображения изображения котика
-    image_html = '<img src="data:image/png;base64,{0}">'.format(prediction)
+    # преобразование предсказания в html-код для отображения изображения
+    image_html = convert_prediction_to_html(prediction)
 
-    return render_template_string(image_html)
+    return render_template('index.html', image_html=image_html)
+
+
+# преобразование предсказания в html-код для отображения изображения
+def convert_prediction_to_html(prediction):
+    classes = ['Котик', 'Собака', 'Птица']  # для примера, замените на ваши классы
+    probabilities = prediction[0]
+    image_html = ""
+
+    for i in range(len(classes)):
+        image_html += "<p>{0}: {1}%</p>".format(classes[i], probabilities[i] * 100)
+
+    return image_html
+
+
+# загрузка изображения пользователя для предсказания
+@app.route('/predict', methods=['POST'])
+def predict():
+    file = request.files['image']
+    image = Image.open(file.stream)
+    image = image.resize((input_shape, input_shape))
+    image_array = np.array(image) / 255.0  # нормализация значений пикселей
+    image_array = np.expand_dims(image_array, axis=0)
+    prediction = model.predict(image_array)
+    image_html = convert_prediction_to_html(prediction)
+    return render_template('index.html', image_html=image_html)
+
 
 if __name__ == "__main__":
-    # Запуск веб-сервера
+    # параметры модели
+    input_shape = 224
+
+    # запуск веб-сервера
     app.run()
