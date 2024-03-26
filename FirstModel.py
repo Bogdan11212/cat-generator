@@ -1,6 +1,8 @@
+# first model for use this image generatir
+# importing librations 
 import tensorflow as tf
 from tensorflow.keras import layers
-
+# создание функции для запуска модели 
 def create_generator_model():
     # Создаем пустую модель Sequential
     model = tf.keras.Sequential()
